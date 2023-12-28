@@ -1,4 +1,4 @@
-cureentBuild.displayName = "HelloWorld : "+currentBuild.number
+currentBuild.displayName = "HelloWorld : "+currentBuild.number
 pipeline {
     agent { label 'one' }  // Restrict the job to run on a node with the specified label
 
