@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'one' }
+    agent { label 'two' }
 
     stages {
         // Uncomment the following stage if needed
