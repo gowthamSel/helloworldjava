@@ -1,6 +1,8 @@
 pipeline {
     agent { label 'two' }
-
+     tools {
+        maven 'Maven 3.8.7'
+    }
     stages {
         // Uncomment the following stage if needed
         /*
