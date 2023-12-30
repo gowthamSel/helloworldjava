@@ -1,7 +1,7 @@
 currentBuild.displayName = "HelloWorld : " + currentBuild.number
 
 pipeline {
-    agent { label 'one' }
+    agent any
     stages {
         stage('clean') {
             steps {
@@ -24,16 +24,16 @@ pipeline {
             }
         }
 
-        stage('Move To agentTwo') {
-            steps {
-                script {
-                    sshagent(['agentOne']) {
-                        sh "scp -o StrictHostKeyChecking=no ./target/helloWorldJava-0.0.1-SNAPSHOT.jar root@192.168.17.223:/root/"
-                    }
-                    echo 'Deploying...'
-                }
-            }
-        }
+        // stage('Move To agentTwo') {
+        //     steps {
+        //         script {
+        //             sshagent(['agentOne']) {
+        //                 sh "scp -o StrictHostKeyChecking=no ./target/helloWorldJava-0.0.1-SNAPSHOT.jar root@192.168.17.223:/root/"
+        //             }
+        //             echo 'Deploying...'
+        //         }
+        //     }
+        // }
 
         stage('Deploy') {
             steps {
