@@ -2,7 +2,9 @@ currentBuild.displayName = "HelloWorld : " + currentBuild.number
 
 pipeline {
     agent any
-
+    tools {
+        maven 'Maven 3.8.7'
+    }
     stages {
         stage('clean') {
             steps {
