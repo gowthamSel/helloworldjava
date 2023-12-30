@@ -1,6 +1,3 @@
-// Set the display name for the build
-currentBuild.displayName = "HelloWorld : " + currentBuild.number
-
 pipeline {
     agent { label 'one' }
 
