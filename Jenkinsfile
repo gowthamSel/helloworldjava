@@ -1,5 +1,4 @@
-currentBuild.displayName = "HelloWorld : " + currentBuild.number
-
+// currentBuild.displayName = "HelloWorld : " + currentBuild.number
 pipeline {
     agent any
     stages {
