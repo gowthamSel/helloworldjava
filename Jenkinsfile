@@ -1,6 +1,9 @@
-// currentBuild.displayName = "HelloWorld : " + currentBuild.number
+// Set the display name for the build
+currentBuild.displayName = "HelloWorld : " + currentBuild.number
+
 pipeline {
     agent any
+
     stages {
         // Uncomment the following stage if needed
         /*
@@ -32,4 +35,18 @@ pipeline {
             steps {
                 script {
                     sshagent(['agentOne']) {
-                        sh "scp -
+                        sh "scp -o StrictHostKeyChecking=no ./target/helloWorldJava-0.0.1-SNAPSHOT.jar root@192.168.17.223:/root/"
+                    }
+                    echo 'Deploying...'
+                }
+            }
+        }
+        */
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+}
