@@ -1,33 +1,31 @@
-currentBuild.displayName = "HelloWorld : "+currentBuild.number
+currentBuild.displayName = "HelloWorld : " + currentBuild.number
+
 pipeline {
-    agent { label 'one' }  // Restrict the job to run on a node with the specified label
+    agent any
 
     stages {
-      //   stage('Check out') {
-        //   steps {
-          //    echo "checkOut into the github and clone"
-            //  git credentialsId: 'GITHUB', url: 'https://github.com/GowthamReddy-E/helloWorldJava.git'
-        //    }
-       // }
         stage('clean') {
             steps {
                 echo 'Building...'
                 sh 'mvn clean'
             }
         }
+
         stage('Test') {
             steps {
                 echo 'Testing...'
                 sh 'mvn clean test'
             }
         }
-         stage('Build') {
+
+        stage('Build') {
             steps {
                 echo 'Building...'
                 sh 'mvn clean install'
             }
         }
-         stage('Move To agentTwo') {
+
+        stage('Move To agentTwo') {
             steps {
                 script {
                     sshagent(['agentOne']) {
@@ -37,6 +35,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
