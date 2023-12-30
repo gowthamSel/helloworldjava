@@ -2,7 +2,7 @@
 currentBuild.displayName = "HelloWorld : " + currentBuild.number
 
 pipeline {
-    agent { label 'two' }
+    agent { label 'one' }
 
     stages {
         // Uncomment the following stage if needed
