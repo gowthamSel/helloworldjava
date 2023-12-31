@@ -4,6 +4,9 @@
   <artifactId>helloWorldJava</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  <name>helloWorldJava</name>
+  <url>http://maven.apache.org</url>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -23,7 +26,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.1</version>
+        <version>3.11.0</version>
         <configuration>
           <source>11</source>
           <target>11</target>
@@ -52,5 +55,12 @@
             </plugin>
     </plugins>
   </build>
- 
+ <distributionManagement>
+    <repository>
+        <id>GowthamReddy-E</id>
+        <name>this is the helloworldjava package</name>
+        <url>https://github.com/GowthamReddy-E/helloWorldJava</url>
+    </repository>
+</distributionManagement>
+
 </project>
