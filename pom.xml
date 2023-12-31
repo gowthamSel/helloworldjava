@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>helloWorldJava</groupId>
+  <groupId>org.example</groupId>
   <artifactId>helloWorldJava</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
@@ -48,7 +48,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.helloworldjava</mainClass>
+                            <mainClass>helloworldjava</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -57,9 +57,9 @@
   </build>
  <distributionManagement>
     <repository>
-        <id>GowthamReddy-E</id>
+        <id>github</id>
         <name>this is the helloworldjava package</name>
-        <url>https://github.com/GowthamReddy-E/helloWorldJava.git</url>
+        <url>https://github.com/GowthamReddy-E/helloWorldJava</url>
     </repository>
 </distributionManagement>
 </project>
