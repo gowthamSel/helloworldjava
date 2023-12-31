@@ -59,8 +59,8 @@
     <repository>
         <id>GowthamReddy-E</id>
         <name>this is the helloworldjava package</name>
-        <url>https://github.com/GowthamReddy-E/helloWorldJava</url>
+        <url>https://github.com/GowthamReddy-E/helloWorldJava.git</url>
     </repository>
-</distributionManagement> 
+</distributionManagement>
 </project>
 
