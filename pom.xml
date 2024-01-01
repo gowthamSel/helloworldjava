@@ -56,11 +56,12 @@
     </plugins>
   </build>
  <distributionManagement>
-    <repository>
+     <repository>
         <id>github</id>
         <name>this is the helloworldjava package</name>
         <url>https://github.com/GowthamReddy-E/helloWorldJava</url>
     </repository>
+   
 </distributionManagement>
 </project>
 
