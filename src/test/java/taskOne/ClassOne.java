@@ -13,4 +13,7 @@ public class ClassOne {
 	public static void methodThree() {
 		System.out.println("Hello-Canada ");
 	}
+	public static void methodFour() {
+		System.out.println("Hello-Canada ");
+	}
 }

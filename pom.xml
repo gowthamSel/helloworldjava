@@ -58,10 +58,9 @@
  <distributionManagement>
      <repository>
         <id>github</id>
-        <name>this is the helloworldjava package</name>
+        <name>helloWorldJava</name>
         <url>https://github.com/GowthamReddy-E/helloWorldJava</url>
-    </repository>
-   
+    </repository>   
 </distributionManagement>
 </project>
 
