@@ -1,32 +1,18 @@
 pipeline {
-    agent { label 'two' }   
-    environment {
-        MAVEN_HOME = '/opt/apache-maven-3.9.6'
-        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
-    }
-    stages {         
-        stage('clean') {
-            steps {
-                echo 'Building...'
-                sh 'mvn build'
-            }
-        }    
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-                sh 'mvn build'
-            }
-        }
+    agent any
 
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                sh 'mvn build'
-            }
-        }
+    environment {
+        REMOTE_SERVER = 'user@remote-server'
+    }
+
+    stages {
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
+                withCredentials([sshUserPrivateKey(credentialsId: 'YOUR_CREDENTIALS_ID', keyFileVariable: 'SSH_KEY', passphraseVariable: 'SSH_PASSPHRASE')]) {
+                    sh '''
+                        scp -i $SSH_KEY -o StrictHostKeyChecking=no ./your-file.txt $REMOTE_SERVER:/path/to/destination/
+                    '''
+                }
             }
         }
     }
