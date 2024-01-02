@@ -1,22 +1,13 @@
-<!--
-  ~ Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
-  ~
-  ~ For licensing information, please see LICENSE.md.
-  ~ You may not use this file except in compliance with the license.
-  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <groupId>org.example</groupId>
+    <artifactId>helloworldjava</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-	<groupId>io.github.mikenakis</groupId>
-	<artifactId>helloworldjava</artifactId>
-	<version>1.13-SNAPSHOT</version>
-	<packaging>pom</packaging>
-
-	<modules>
-		<module>main</module>
-		<module>test</module>
-	</modules>
+	
 
 	<name>gowthamreddye</name>
 	<description>Deep immutability assessment for Java objects.</description>
@@ -36,23 +27,17 @@
 			</roles>
 		</developer>
 	</developers>
-
 	<scm>
 		<url>https://github.com/GowthamReddy-E/helloworldjava</url>
 		<connection>scm:git:${project.scm.url}</connection>
 		<developerConnection>scm:git:${project.scm.url}</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<!--		<maven.compiler.source>17</maven.compiler.source>-->
-<!--		<maven.compiler.target>17</maven.compiler.target>-->
-		<!-- Due to the use of preview features, we must target the latest JDK, even though we could have worked with JDK 17. -->
 		<maven.compiler.source>19</maven.compiler.source>
 		<maven.compiler.target>19</maven.compiler.target>
 	</properties>
-
 	<distributionManagement>
 		<repository>			
 			<id>github</id>
@@ -63,9 +48,7 @@
 			<url>https://github.com/GowthamReddy-E/helloworldjava</url>
 		</snapshotRepository>
 	</distributionManagement>
-
 	<build>
-
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -111,7 +94,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -119,24 +101,18 @@
 				<version>3.8.1</version>
 				<configuration>
 					<compilerArgs>
-
 						<!-- The "enable-preview" option "Enables preview features of the JVM". Since home projects of mine are all about experimentation, we want this. -->
 						<arg>--enable-preview</arg>
-
 						<!-- The "-parameters" option "Generates metadata for reflection on method parameters." That's good, we want this. -->
 						<arg>-parameters</arg>
-
 						<!-- If there are any warnings, we want compilation to fail. I pity all those who a) don't have as many as possible warnings enabled, and b) don't have
 						     their build configured to treat warnings as errors. -->
 						<arg>-Werror</arg>
-
 						<!-- The "-Xlint" option enables all recommended warnings. We will then suppress some that we have no use for. -->
 						<arg>-Xlint</arg>
-
 						<!-- The "preview" sub-option of the "Xlint" option will generate a warning for each use of a preview feature.  Since we are explicitly enabling preview
 						     features using the "enable-preview" compiler argument, this sub-option is entirely useless, so we disable it. -->
 						<arg>-Xlint:-preview</arg>
-
 						<!-- The "try" sub-option of the "Xlint" option is mind-bogglingly stupid.
 							It lives in a simplistic world in which resources are always created, used, and disposed within a single function, so it aims to warn you that you
 							forgot to dispose of a resource within the function that created it.
@@ -145,12 +121,10 @@
 							- You might create a resource and store it as a member variable of an object, which will of course dispose the resource when it gets disposed.
 							So, the only reasonable thing to do with this warning is to always keep it disabled. -->
 						<arg>-Xlint:-try</arg>
-
 						<!-- The "serial" sub-option of the "Xlint" option "Warns about missing serialVersionUID definitions on serializable classes".
 						    In other words, every single time you extend some predefined class, you will be hit with an annoying warning just because the class you are extending
 						    happens to be serializable, a feature which you usually have no use for, don't care about, and don't want to be bothered with. -->
 						<arg>-Xlint:-serial</arg>
-
 						<!-- PEARL: When the packaging is 'jar', IntellijIdea creates a "target/generated-sources/annotations" directory in our source tree each time we build.
 							 IntellijIdea insists on doing this, despite the fact that:
 							 - We have specified that we do not want any annotation processing to take place. (In this case, the directory still gets created, and is empty.)
@@ -238,7 +212,6 @@
 		<artifactId>testng</artifactId>
 		<version>7.8.0</version>
 		<scope>test</scope>
-	</dependency>
-	
-  </dependencies>
+	</dependency>	
+</dependencies>
 </project>
