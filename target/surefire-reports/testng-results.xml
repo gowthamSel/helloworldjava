@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-01-01T20:37:15 IST" name="Surefire suite" finished-at="2024-01-01T20:37:15 IST" duration-ms="48">
+  <suite started-at="2024-01-01T22:36:14 IST" name="Surefire suite" finished-at="2024-01-01T22:36:14 IST" duration-ms="53">
     <groups>
     </groups>
-    <test started-at="2024-01-01T20:37:15 IST" name="Surefire test" finished-at="2024-01-01T20:37:15 IST" duration-ms="48">
+    <test started-at="2024-01-01T22:36:14 IST" name="Surefire test" finished-at="2024-01-01T22:36:14 IST" duration-ms="53">
       <class name="tests.Test_001">
-        <test-method signature="tc_001()[pri:0, instance:tests.Test_001@6236eb5f]" started-at="2024-01-01T20:37:15 IST" name="tc_001" finished-at="2024-01-01T20:37:15 IST" duration-ms="4" status="PASS">
+        <test-method signature="tc_001()[pri:0, instance:tests.Test_001@7c1e2a9e]" started-at="2024-01-01T22:36:14 IST" name="tc_001" finished-at="2024-01-01T22:36:14 IST" duration-ms="5" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_001 -->
-        <test-method signature="tc_002()[pri:0, instance:tests.Test_001@6236eb5f]" started-at="2024-01-01T20:37:15 IST" name="tc_002" finished-at="2024-01-01T20:37:15 IST" duration-ms="1" status="PASS">
+        <test-method signature="tc_002()[pri:0, instance:tests.Test_001@7c1e2a9e]" started-at="2024-01-01T22:36:14 IST" name="tc_002" finished-at="2024-01-01T22:36:14 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_002 -->
-        <test-method signature="tc_003()[pri:0, instance:tests.Test_001@6236eb5f]" started-at="2024-01-01T20:37:15 IST" name="tc_003" finished-at="2024-01-01T20:37:15 IST" duration-ms="1" status="PASS">
+        <test-method signature="tc_003()[pri:0, instance:tests.Test_001@7c1e2a9e]" started-at="2024-01-01T22:36:14 IST" name="tc_003" finished-at="2024-01-01T22:36:14 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_003 -->
