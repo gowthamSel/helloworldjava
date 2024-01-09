@@ -1,4 +1,3 @@
-currentBuild.displayName = "helloworldjava: #" + currentBuild.number
 pipeline {
     agent { label 'cone' }   
     environment {
@@ -28,12 +27,13 @@ pipeline {
         stage('Move to agentone container into agentone server') {
             steps {
                 script {
+                    currentBuild.displayName = "helloworldjava: #" + currentBuild.number
+
                     sshagent(credentials: ['agentone'], ignoreMissing: true) {
                         sh 'scp -o StrictHostKeyChecking=no ./target/helloWorldJava-0.0.1-SNAPSHOT.jar root@192.168.17.232:/home/JenkinsWorkspace'
                     }
                 }
             }
         }
-
     }
 }
