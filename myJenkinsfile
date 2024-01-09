@@ -1,3 +1,4 @@
+currentBuild.displayName = "helloworldjava: #" + currentBuild.number
 pipeline {
     agent { label 'cone' }   
     environment {
