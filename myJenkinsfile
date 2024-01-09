@@ -1,20 +1,20 @@
 pipeline {
-    agent { label 'two' }   
+    agent { label 'cone' }   
     environment {
-        MAVEN_HOME = '/opt/apache-maven-3.9.6'
+        MAVEN_HOME = '/opt/apache-maven-*'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
     }
     stages {         
         stage('clean') {
             steps {
-                echo 'Building...'
-                sh 'mvn build'
+                echo 'clean the cache first...'
+                sh 'mvn clean'
             }
         }    
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'mvn build'
+                sh 'mvn test'
             }
         }
 
@@ -22,11 +22,6 @@ pipeline {
             steps {
                 echo 'Building...'
                 sh 'mvn build'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
             }
         }
     }
