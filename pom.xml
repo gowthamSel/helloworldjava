@@ -1,66 +1,90 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>helloWorldJava</groupId>
-  <artifactId>helloWorldJava</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  
-  <name>helloWorldJava</name>
-  <url>http://maven.apache.org</url>
-  
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
-  <dependencies>
-	  <dependency>
-		<groupId>org.testng</groupId>
-		<artifactId>testng</artifactId>
-		<version>7.8.0</version>
-		<scope>compile</scope>
-	</dependency>
-	
-  </dependencies>
-  
- <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
-        <configuration>
-          <source>11</source>
-          <target>11</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
-        <configuration>
-          <suiteXmlFiles>
-          </suiteXmlFiles>
-        </configuration>
-      </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.example.helloworldjava</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-    </plugins>
-  </build>
- <distributionManagement>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>org.example</groupId>
+    <artifactId>helloworldjava</artifactId>
+    <version>1.4-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <distributionManagement>
     <repository>
-        <id>GowthamReddy-E</id>
+        <id>github</id>
         <name>this is the helloworldjava package</name>
-        <url>https://github.com/GowthamReddy-E/helloWorldJava</url>
+        <url>https://github.com/GowthamReddy-E/helloworldjava</url>
     </repository>
 </distributionManagement>
+    <developers>
+        <developer>
+            <name>Gowtham reddy</name>
+            <email>gowthamreddy.6991@gmail.com</email>
+            <organization>com.github.gowthamreddy-e</organization>
+            <organizationUrl>https://github.com/GowthamReddy-E/helloworldjava</organizationUrl>
+        </developer>
+    </developers>
 
+    <scm>
+        <connection>scm:git:git://github.com/GowthamReddy-E/helloworldjava.git</connection>
+        <developerConnection>scm:git:https://github.com/GowthamReddy-E/helloworldjava.git
+        </developerConnection>
+        <url>https://github.com/GowthamReddy-E/helloworldjava</url>
+        <tag>helloworldjava</tag>
+    </scm>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>3.6.0</version>
+                    <configuration>
+                        <!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+                        <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.9.1</version>
+                </plugin>
+                <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>3.0.0-M1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>3.0.0-M2</version>
+				</plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M1</version>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+		<dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.6.1</version>
+      <scope>compile</scope>
+    </dependency>
+    
+	</dependencies>
 </project>
