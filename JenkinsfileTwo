@@ -31,23 +31,29 @@ pipeline {
         stage('Publish to JFrog') {
             steps {
                 script {
-                    def server = Artifactory.server 'browserArtifactory' // Replace with the configured Artifactory server ID
-                    def buildInfo = Artifactory.newBuildInfo()
+                  withCredentials([usernamePassword(credentialsId: 'jfrogUser', passwordVariable: 'JFROG_PASSWORD', usernameVariable: 'JFROG_USERNAME')]) {
+                     def server = Artifactory.server 'browserArtifactory' // Replace with the configured Artifactory server ID
+                        def buildInfo = Artifactory.newBuildInfo()
 
-                    // Set the Artifactory server URL and repository details
-                    buildInfo.env.capture = true
-                    buildInfo.env.artifactoryUrl = 'https://gowthamreddy.jfrog.io/artifactory/' // Replace with your JFrog Artifactory URL
-                    buildInfo.env.artifactoryRepo = 'your-repository' // Replace with your JFrog repository name
+                        // Set the Artifactory server URL and repository details
+                        buildInfo.env.capture = true
+                        buildInfo.env.artifactoryUrl = 'https://gowthamreddy.jfrog.io/artifactory/' // Replace with your JFrog Artifactory URL
+                        buildInfo.env.artifactoryRepo = 'your-repository' // Replace with your JFrog repository name
 
-                    // Publish the build information to JFrog Artifactory
-                    server.publishBuildInfo buildInfo
+                        // Set username and password from Jenkins Credentials
+                        buildInfo.env.artifactoryUsername = JFROG_USERNAME
+                        buildInfo.env.artifactoryPassword = JFROG_PASSWORD
+
+                        // Publish the build information to JFrog Artifactory
+                        server.publishBuildInfo buildInfo
                 }
             }
         }
+    }
 
         stage('Publish HTML Reports') {
             steps {
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, reportDir: 'target/site', reportFiles: 'index.html', reportName: 'HTML Report'])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, reportDir: './test-output/', reportFiles: 'index.html', reportName: 'HTML Report'])
             }
         }
 
@@ -55,7 +61,7 @@ pipeline {
             steps {
                 script {
                     sshagent(['your-ssh-credentials-id']) {
-                        sh 'scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.43.52:/home/gowtham/JenkinsWorkspace/'                    }
+                        sh 'scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.17.130:/home/gowtham/JenkinsWorkspace/'                    }
                 }
             }
         }
