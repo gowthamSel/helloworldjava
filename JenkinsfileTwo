@@ -2,10 +2,11 @@ pipeline {
     agent any
 
     environment {
-        MAVEN_HOME = tool 'Maven'
+        MAVEN_HOME = '/opt/apache-maven-*'
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
         JFROG_URL = 'https://gowthamreddy.jfrog.io/artifactory/'
         JFROG_REPO = 'docker-trial'
-        OTHER_SERVER_URL = 'ssh://user@other-server:/path/to/destination'
+        OTHER_SERVER_URL = 'root@192.168.17.130:/home/jenkinsWorlspace'
     }
 
     stages {
