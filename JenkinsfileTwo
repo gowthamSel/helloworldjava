@@ -3,32 +3,27 @@ pipeline {
 
     environment {
         MAVEN_HOME = tool 'Maven'
-        JFROG_URL = 'https://your-jfrog-instance/artifactory/'
-        JFROG_REPO = 'your-repository'
+        JFROG_URL = 'https://gowthamreddy.jfrog.io/artifactory/'
+        JFROG_REPO = 'docker-trial'
         OTHER_SERVER_URL = 'ssh://user@other-server:/path/to/destination'
     }
 
     stages {
         stage('Clean') {
             steps {
-                sh "${MAVEN_HOME}/bin/mvn clean"
+                sh "mvn clean"
             }
         }
 
         stage('Test') {
             steps {
-                sh "${MAVEN_HOME}/bin/mvn test"
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
+                sh "mvn test"
+            }          
         }
 
         stage('Deploy') {
             steps {
-                sh "${MAVEN_HOME}/bin/mvn deploy"
+                sh "mvn deploy"
             }
         }
 
