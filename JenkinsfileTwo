@@ -2,6 +2,10 @@ pipeline {
     agent {
         label 'master'
     }
+    tools {
+        // Specify the Git tool defined in Jenkins configuration
+        git 'Git'
+    }
 
     environment {
         MAVEN_HOME = '/opt/apache-maven-*'
