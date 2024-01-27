@@ -31,12 +31,12 @@ pipeline {
         stage('Publish to JFrog') {
             steps {
                 script {
-                    def server = Artifactory.server 'YourArtifactoryServer' // Replace with the configured Artifactory server ID
+                    def server = Artifactory.server 'browserArtifactory' // Replace with the configured Artifactory server ID
                     def buildInfo = Artifactory.newBuildInfo()
 
                     // Set the Artifactory server URL and repository details
                     buildInfo.env.capture = true
-                    buildInfo.env.artifactoryUrl = 'https://your-jfrog-instance/artifactory/' // Replace with your JFrog Artifactory URL
+                    buildInfo.env.artifactoryUrl = 'https://gowthamreddy.jfrog.io/artifactory/' // Replace with your JFrog Artifactory URL
                     buildInfo.env.artifactoryRepo = 'your-repository' // Replace with your JFrog repository name
 
                     // Publish the build information to JFrog Artifactory
@@ -51,12 +51,11 @@ pipeline {
             }
         }
 
-        stage('Transfer Artifacts to Other Server') {
+        stage('Transfer Artifacts to FTP Server') {
             steps {
                 script {
                     sshagent(['your-ssh-credentials-id']) {
-                        sh "scp -r target/ user@other-server:/path/to/destination"
-                    }
+                        sh 'scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.43.52:/home/gowtham/JenkinsWorkspace/'                    }
                 }
             }
         }
