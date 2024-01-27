@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'master'
+    }
 
     environment {
         MAVEN_HOME = '/opt/apache-maven-*'
@@ -60,7 +62,7 @@ pipeline {
         stage('Transfer Artifacts to FTP Server') {
             steps {
                 script {
-                    sshagent(['your-ssh-credentials-id']) {
+                    sshagent(credentials: ['agentone'], ignoreMissing: true) {
                         sh 'scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.17.130:/home/JenkinsWorkspace/'
                     }
                 }
