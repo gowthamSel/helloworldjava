@@ -1,14 +1,21 @@
 pipeline {
-    agent { label 'one' }
+//    agent { label 'one' }
 
+//    environment {
+//        MAVEN_HOME = "/opt/apache-maven-*"
+//        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
+//        JFROG_URL = "https://gowthamreddy.jfrog.io/artifactory/"
+//        JFROG_REPO = "docker-trial"
+//        OTHER_SERVER_URL = "root@192.168.17.130:/home/JenkinsWorkspace"
+//   }
+    agent  { label 'one' }   
     environment {
         MAVEN_HOME = '/opt/apache-maven-*'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
-        JFROG_URL = 'https://gowthamreddy.jfrog.io/artifactory/'
-        JFROG_REPO = 'docker-trial'
-        OTHER_SERVER_URL = 'root@192.168.17.130:/home/JenkinsWorkspace'
+        JFROG_URL = "https://gowthamreddy.jfrog.io/artifactory/"
+        JFROG_REPO = "docker-trial"
+        OTHER_SERVER_URL = "root@192.168.17.130:/home/JenkinsWorkspace"
     }
-
     stages {
         stage('Clean') {
             steps {
