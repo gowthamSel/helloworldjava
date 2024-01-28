@@ -1,11 +1,11 @@
 pipeline {
-   agent  { label 'one' }   
+    agent { label 'one' }
+
     environment {
         MAVEN_HOME = '/opt/apache-maven-*'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
     }
-    agent  { label 'one' }   
-  
+
     stages {
         stage('Clean') {
             steps {
