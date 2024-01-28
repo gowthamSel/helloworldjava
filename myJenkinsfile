@@ -1,6 +1,5 @@
 pipeline {
-    agent  any
-//{ label 'cone' }   
+    agent  { label 'one' }   
     environment {
         MAVEN_HOME = '/opt/apache-maven-*'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
