@@ -9,13 +9,7 @@ pipeline {
 //        OTHER_SERVER_URL = "root@192.168.17.130:/home/JenkinsWorkspace"
 //   }
     agent  { label 'one' }   
-    environment {
-        MAVEN_HOME = '/opt/apache-maven-*'
-        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
-        JFROG_URL = "https://gowthamreddy.jfrog.io/artifactory/"
-        JFROG_REPO = "docker-trial"
-        OTHER_SERVER_URL = "root@192.168.17.130:/home/JenkinsWorkspace"
-    }
+  
     stages {
         stage('Clean') {
             steps {
@@ -69,7 +63,7 @@ pipeline {
                 script {
                     sshagent(credentials: ['agentone'], ignoreMissing: true) {
                         // Use the defined environment variable for the target directory
-                        sh "scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar ${OTHER_SERVER_URL}/"
+                        sh "scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.17.130:/home/JenkinsWorkspace"
                     }
                 }
             }
