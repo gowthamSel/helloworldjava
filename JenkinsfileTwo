@@ -19,30 +19,6 @@ pipeline {
                 sh "mvn test"
             }          
         }
-
-        stage('Publish to JFrog') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'jfrogUser', passwordVariable: 'JFROG_PASSWORD', usernameVariable: 'JFROG_USERNAME')]) {
-                        def server = Artifactory.server 'browserArtifactory' // Replace with the configured Artifactory server ID
-                        def buildInfo = Artifactory.newBuildInfo()
-
-                        // Set the Artifactory server URL and repository details
-                        buildInfo.env.capture = true
-                        buildInfo.env.artifactoryUrl = JFROG_URL // Use the defined environment variable
-                        buildInfo.env.artifactoryRepo = JFROG_REPO // Use the defined environment variable
-
-                        // Set username and password from Jenkins Credentials
-                        buildInfo.env.artifactoryUsername = JFROG_USERNAME
-                        buildInfo.env.artifactoryPassword = JFROG_PASSWORD
-
-                        // Publish the build information to JFrog Artifactory
-                        server.publishBuildInfo buildInfo
-                    }
-                }
-            }
-        }
-
         stage('Publish HTML Reports') {
             steps {
                 publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './test-output/', reportFiles: 'index.html', reportName: 'HTML Report')
