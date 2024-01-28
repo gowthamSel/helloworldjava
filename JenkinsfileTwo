@@ -1,6 +1,5 @@
 pipeline {
     agent any
-//{ label 'one' }
 
     environment {
         MAVEN_HOME = '/opt/apache-maven-*'
@@ -19,14 +18,16 @@ pipeline {
                 sh "mvn test"
             }          
         } 
+
         stage('Install') {
             steps {
                 sh "mvn install"
             }          
         }
+
         stage('Publish HTML Reports') {
             steps {
-                publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './test-output/', reportFiles: 'index.html', reportName: 'HTML Report')
+                publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './target/surefire-reports/', reportFiles: 'index.html', reportName: 'HTML Report')
             }
         }
 
@@ -34,7 +35,6 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['agentone'], ignoreMissing: true) {
-                        // Use the defined environment variable for the target directory
                         sh "scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.17.130:/home/JenkinsWorkspace"
                     }
                 }
