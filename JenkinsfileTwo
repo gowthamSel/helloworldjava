@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'two'}
+    agent { label 'two' }
 
     environment {
         MAVEN_HOME = '/opt/apache-maven-*'
