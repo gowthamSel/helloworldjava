@@ -1,5 +1,6 @@
 pipeline {
-    agent { label 'cone' }   
+    agent  any
+//{ label 'cone' }   
     environment {
         MAVEN_HOME = '/opt/apache-maven-*'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
@@ -30,7 +31,7 @@ pipeline {
                     currentBuild.displayName = "helloworldjava: #" + currentBuild.number
 
                     sshagent(credentials: ['agentThree'], ignoreMissing: true) {
-                        sh 'scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.43.52:/home/gowtham/'
+                        sh 'scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.17.130:/home/gowtham/'
                     }
                 }
             }
