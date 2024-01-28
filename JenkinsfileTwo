@@ -18,6 +18,11 @@ pipeline {
             steps {
                 sh "mvn test"
             }          
+        } 
+        stage('Install') {
+            steps {
+                sh "mvn install"
+            }          
         }
         stage('Publish HTML Reports') {
             steps {
