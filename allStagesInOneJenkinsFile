@@ -39,7 +39,7 @@ pipeline {
             }
         }
 
-         stage('Transfer Artifacts to FTP Server') {
+      /*   stage('Transfer Artifacts to FTP Server') {
             steps {
                 script {
                     sshagent(credentials: ['AgentOneServer'], ignoreMissing: true) {
@@ -51,7 +51,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Upload to Artifactory') {
             steps {
                 script {
