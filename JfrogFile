@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        // Define the Artifactory server ID configured in Jenkins
+        ARTIFACTORY_SERVER_ID = 'browserArtifactory'
+        // Define the Artifactory repository and target path
+        ARTIFACTORY_REPO = 'java-web-app'
+        ARTIFACTORY_TARGET_PATH = 'target-repo/'
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Checkout code from your Git repository
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build your Java web application
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Deploy to Artifactory') {
+            steps {
+                // Deploy the artifact to Artifactory
+                rtUpload (
+                    serverId: env.ARTIFACTORY_SERVER_ID,
+                    spec: '''{
+                        "files": [
+                            {
+                                "pattern": "./target/*.jar",
+                                "target": "${env.ARTIFACTORY_REPO}/${env.ARTIFACTORY_TARGET_PATH}"
+                            }
+                        ]
+                    }''',
+                    buildName: 'holyFrog',
+                    buildNumber: '42',
+                    project: 'helloworldjava'
+                )
+            }
+        }
+    }
+}
