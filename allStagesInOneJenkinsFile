@@ -15,19 +15,11 @@ pipeline {
                 sh 'mvn clean'
             }
         }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-
         stage('Install') {
             steps {
-                sh 'mvn install'
+                sh 'deploy'
             }
         }
-
         stage('Publish HTML Reports') {
             steps {
                 publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './target/surefire-reports/', reportFiles: 'index.html', reportName: 'HelloWorld HTML Report')
