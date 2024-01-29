@@ -1,46 +1,22 @@
 pipeline {
-    agent { label 'two' }
+    agent any
 
     environment {
-        // Define the Artifactory server ID configured in Jenkins
-        ARTIFACTORY_SERVER_ID = 'browserArtifactory'
-        // Define the Artifactory repository and target path
-        ARTIFACTORY_REPO = 'java-web-app'
-        ARTIFACTORY_TARGET_PATH = 'target-repo/'
+        ARTIFACTORY_URL = 'https://gowthamreddy.jfrog.io/artifactory/'
+        CREDENTIAL_ID = 'YOUR_ACCESS_TOKEN_ID'
+        ARTIFACT_PATH = './target/*.jar'
+        TARGET_REPO = 'java-web-app/'
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('Upload to Artifactory') {
             steps {
-                // Checkout code from your Git repository
-                checkout scm
-            }
-        }
-
-        stage('Build') {
-            steps {
-                // Build your Java web application
-                sh 'mvn clean install'
-            }
-        }
-
-        stage('Deploy to Artifactory') {
-            steps {
-                // Deploy the artifact to Artifactory
-                rtUpload (
-                    serverId: env.ARTIFACTORY_SERVER_ID,
-                    spec: '''{
-                        "files": [
-                            {
-                                "pattern": "./target/*.jar",
-                                "target": "${env.ARTIFACTORY_REPO}/${env.ARTIFACTORY_TARGET_PATH}"
-                            }
-                        ]
-                    }''',
-                    buildName: 'holyFrog',
-                    buildNumber: '42',
-                    project: 'helloworldjava'
-                )
+                withCredentials([string(credentialsId: 'JFrogTocken', variable: 'ACCESS_TOKEN')]) {
+                    script {
+                        // Use the ACCESS_TOKEN variable in your JFrog CLI command
+                        sh "jfrog rt upload --url ${ARTIFACTORY_URL} --access-token ${ACCESS_TOKEN} ${ARTIFACT_PATH} ${TARGET_REPO}"
+                    }
+                }
             }
         }
     }
