@@ -12,17 +12,30 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                sh 'mvn clean'
+                script {
+                    sh 'mvn clean'
+                }
             }
         }
         stage('Install') {
             steps {
-                sh 'deploy'
+                script {
+                    sh 'mvn deploy'
+                }
             }
         }
         stage('Publish HTML Reports') {
             steps {
-                publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './target/surefire-reports/', reportFiles: 'index.html', reportName: 'HelloWorld HTML Report')
+                script {
+                    publishHTML(
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: './target/surefire-reports/',
+                        reportFiles: 'index.html',
+                        reportName: 'HelloWorld HTML Report'
+                    )
+                }
             }
         }
 
@@ -41,9 +54,8 @@ pipeline {
 
         stage('Upload to Artifactory') {
             steps {
-                withCredentials([string(credentialsId: 'JFrogTocken', variable: 'ACCESS_TOKEN')]) {
-                    script {
-                        // Use the ACCESS_TOKEN variable in your JFrog CLI command
+                script {
+                    withCredentials([string(credentialsId: 'JFrogTocken', variable: 'ACCESS_TOKEN')]) {
                         sh "jfrog rt upload --url ${ARTIFACTORY_URL} --access-token ${ACCESS_TOKEN} ${ARTIFACT_PATH} ${TARGET_REPO}"
                     }
                 }
