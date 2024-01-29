@@ -1,1 +1,61 @@
+pipeline {
+    agent { label 'two' }
 
+    environment {
+        MAVEN_HOME = '/opt/apache-maven-*'
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
+        ARTIFACTORY_URL = 'https://gowthamreddy.jfrog.io/artifactory/'
+        ARTIFACT_PATH = './target/*.jar'
+        TARGET_REPO = 'java-web-app/'
+    }
+
+    stages {
+        stage('Clean') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Install') {
+            steps {
+                sh 'mvn install'
+            }
+        }
+
+        stage('Publish HTML Reports') {
+            steps {
+                publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './target/surefire-reports/', reportFiles: 'index.html', reportName: 'HelloWorld HTML Report')
+            }
+        }
+
+        stage('Transfer Artifacts to FTP Server') {
+            steps {
+                script {
+                    sshagent(credentials: ['AgentOneServer'], ignoreMissing: true) {
+                        sh '''
+                            ssh -o StrictHostKeyChecking=no root@192.168.17.130 \
+                            "scp -o StrictHostKeyChecking=no ./target/helloworldjava-1.4-SNAPSHOT.jar root@192.168.17.130:/home/"
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Upload to Artifactory') {
+            steps {
+                withCredentials([string(credentialsId: 'JFrogTocken', variable: 'ACCESS_TOKEN')]) {
+                    script {
+                        // Use the ACCESS_TOKEN variable in your JFrog CLI command
+                        sh "jfrog rt upload --url ${ARTIFACTORY_URL} --access-token ${ACCESS_TOKEN} ${ARTIFACT_PATH} ${TARGET_REPO}"
+                    }
+                }
+            }
+        }
+    }
+}
