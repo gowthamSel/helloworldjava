@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'two' }
 
     environment {
         // Define the Artifactory server ID configured in Jenkins
